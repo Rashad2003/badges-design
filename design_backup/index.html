@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Badges Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <header class="main-header">
+            <div class="logo">LMS<span class="accent">.Badges</span></div>
+            <nav>
+                <a href="#" class="active">Showcase</a>
+                <a href="#">Documentation</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- SECTION 1: HERO / CONTEXT -->
+            <section class="hero-section">
+                <h1>Celebrate <span class="gradient-text">Achievement</span></h1>
+                <p>Premium badge system designed for maximum student engagement.</p>
+                <button id="trigger-modal-btn" class="btn-primary">Test "Badge Earned" Animation</button>
+            </section>
+
+            <!-- SECTION 2: BADGE GALLERY (HackerRank Style) -->
+            <section class="showcase-section">
+                <h2><i class="fa-solid fa-trophy"></i> Skill Mastery (HackerRank Style)</h2>
+                <div class="badges-grid rankings-grid">
+                    
+                    <!-- Bronze -->
+                    <div class="badge-card bronze">
+                        <div class="badge-visual">
+                            <div class="shield bronze-shield">
+                                <i class="fa-brands fa-python"></i>
+                            </div>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="badge-info">
+                            <h3>Python Basic</h3>
+                            <span class="badge-tier">Bronze Tier</span>
+                        </div>
+                    </div>
+
+                    <!-- Silver -->
+                    <div class="badge-card silver">
+                        <div class="badge-visual">
+                            <div class="shield silver-shield">
+                                <i class="fa-brands fa-js"></i>
+                            </div>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="badge-info">
+                            <h3>JS Intermediate</h3>
+                            <span class="badge-tier">Silver Tier</span>
+                        </div>
+                    </div>
+
+                    <!-- Gold -->
+                    <div class="badge-card gold">
+                        <div class="badge-visual">
+                            <div class="glare"></div>
+                            <div class="shield gold-shield">
+                                <i class="fa-brands fa-react"></i>
+                            </div>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="badge-info">
+                            <h3>React Master</h3>
+                            <span class="badge-tier">Gold Tier</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 3: PROFESSIONAL CERTS (LinkedIn Style) -->
+            <section class="showcase-section">
+                <h2><i class="fa-solid fa-certificate"></i> Course Certifications (LinkedIn Style)</h2>
+                <div class="badges-list">
+                    
+                    <div class="cert-badge">
+                        <div class="cert-icon google-color">
+                            <i class="fa-brands fa-google"></i>
+                        </div>
+                        <div class="cert-details">
+                            <h3>Data Analytics Professional</h3>
+                            <p>Issued by Google • Jan 2026</p>
+                            <button class="btn-outlined-sm">Show Credential <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="cert-badge">
+                        <div class="cert-icon aws-color">
+                            <i class="fa-brands fa-aws"></i>
+                        </div>
+                        <div class="cert-details">
+                            <h3>AWS Solutions Architect</h3>
+                            <p>Issued by Amazon Web Services • Dec 2025</p>
+                            <button class="btn-outlined-sm">Show Credential <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL: CONGRATULATIONS -->
+    <div id="congrats-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="confetti-container"></div>
+            
+            <div class="modal-badge-container">
+                <div class="badge-glow"></div>
+                <div class="shield gold-shield lg-shield">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+            </div>
+
+            <div class="modal-text">
+                <h2>Badge Unlocked!</h2>
+                <p>You've officially earned the <strong class="gold-text">System Architect</strong> badge.</p>
+                
+                <div class="stats-pills">
+                    <span class="pill">+500 XP</span>
+                    <span class="pill">Top 5%</span>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-primary">Add to Profile</button>
+                    <button class="btn-secondary">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
