@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaTrophy, FaCertificate, FaFire } from 'react-icons/fa';
 import { FaPython, FaJs, FaReact } from 'react-icons/fa';
 import BadgeCard from './components/BadgeCard';
-import CertCard from './components/CertCard';
+// import CertCard from './components/CertCard';
 import BadgeModal from './components/BadgeModal';
 import CongratsModal from './components/CongratsModal';
 import StreakModal from './components/StreakModal';
