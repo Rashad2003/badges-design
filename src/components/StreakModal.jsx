@@ -101,7 +101,6 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
         // 3. Open share window with a small delay
         setTimeout(() => {
             window.open(url, '_blank', 'width=600,height=500,noopener,noreferrer');
-            alert("Image downloaded! Attach it to your post.");
         }, 500);
     };
 
@@ -165,7 +164,6 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
                         </button>
 
                         <div className="border-t border-white/10 pt-6 w-full">
-                            <p className="text-slate-400 text-sm mb-4">Share accomplishment</p>
                             <div className="flex justify-center gap-6 text-2xl text-slate-400">
                                 <FaFacebook
                                     className="cursor-pointer hover:text-blue-500 transition-colors transform hover:scale-110"
