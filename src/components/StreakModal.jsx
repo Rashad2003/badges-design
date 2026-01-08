@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { FaFire, FaCheck } from 'react-icons/fa';
+import { FaFire, FaCheck, FaFacebook, FaLinkedin } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import confetti from 'canvas-confetti';
 
-const StreakModal = ({ isOpen, onClose, streakCount = 12 }) => {
+const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -39,9 +40,9 @@ const StreakModal = ({ isOpen, onClose, streakCount = 12 }) => {
         { name: 'T', completed: true },
         { name: 'W', completed: true },
         { name: 'T', completed: true },
-        { name: 'F', completed: true },
-        { name: 'S', completed: true }, // Today
-        { name: 'S', completed: false }, // Tomorrow
+        { name: 'F', completed: false },
+        { name: 'S', completed: false },
+        { name: 'S', completed: false },
     ];
 
     return (
@@ -79,16 +80,18 @@ const StreakModal = ({ isOpen, onClose, streakCount = 12 }) => {
                     </div>
 
                     {/* Action Button */}
-                    <button
-                        onClick={onClose}
-                        className="w-full bg-[#38bdf8] text-slate-900 font-bold py-4 rounded-xl text-lg hover:bg-[#0ea5e9] transition-colors cursor-pointer mb-4"
-                    >
-                        Continue
-                    </button>
 
-                    <button className="text-[#38bdf8] text-sm font-semibold hover:text-white transition-colors cursor-pointer">
-                        Share
-                    </button>
+                    <div className="flex flex-col items-center gap-6">
+                        <button onClick={onClose} className="bg-[var(--color-accent)] text-slate-900 border-none px-8 py-3 rounded-full font-semibold cursor-pointer transition-transform hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-5px_rgba(56,189,248,0.4)]">
+                            Continue
+                        </button>
+
+                        <div className="flex gap-6 text-2xl text-slate-400">
+                            <FaFacebook className="cursor-pointer hover:text-blue-500 transition-colors" />
+                            <FaXTwitter className="cursor-pointer hover:text-white transition-colors" />
+                            <FaLinkedin className="cursor-pointer hover:text-blue-600 transition-colors" />
+                        </div>
+                    </div>
 
                 </div>
             </div>

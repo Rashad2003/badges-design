@@ -3,12 +3,14 @@ import { FaTrophy, FaCertificate, FaFire } from 'react-icons/fa';
 import { FaPython, FaJs, FaReact } from 'react-icons/fa';
 import BadgeCard from './components/BadgeCard';
 import CertCard from './components/CertCard';
+import BadgeModal from './components/BadgeModal';
 import CongratsModal from './components/CongratsModal';
 import StreakModal from './components/StreakModal';
 
 function App() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isCongratsOpen, setIsCongratsOpen] = useState(false);
     const [isStreakModalOpen, setIsStreakModalOpen] = useState(false);
+    const [isBadgeModalOpen, setIsBadgeModalOpen] = useState(false);
     const [selectedBadge, setSelectedBadge] = useState(null);
 
     return (
@@ -27,7 +29,7 @@ function App() {
                         title="View Streak"
                     >
                         <FaFire className="text-orange-500 text-lg animate-pulse" />
-                        <span className="font-bold text-orange-100">12</span>
+                        <span className="font-bold text-orange-100">100</span>
                     </div>
 
                     <nav>
@@ -45,7 +47,7 @@ function App() {
                     </h1>
                     <p className="text-slate-400 text-xl mb-8">Premium badge system designed for maximum student engagement.</p>
                     <button
-                        onClick={() => { setSelectedBadge(null); setIsModalOpen(true); }}
+                        onClick={() => { setSelectedBadge(null); setIsCongratsOpen(true); }}
                         className="bg-[var(--color-accent)] text-slate-900 border-none px-8 py-3 rounded-full font-semibold cursor-pointer transition-transform hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-5px_rgba(56,189,248,0.4)]"
                     >
                         Test "Badge Earned" Animation
@@ -58,13 +60,13 @@ function App() {
                         <FaTrophy className="text-[var(--color-accent)]" /> Skill Mastery (HackerRank Style)
                     </h2>
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8">
-                        <div onClick={() => { setSelectedBadge({ type: 'bronze', title: 'Python Basic', xp: 100, top: '25%' }); setIsModalOpen(true); }} className="cursor-pointer">
+                        <div onClick={() => { setSelectedBadge({ type: 'bronze', title: 'Python Basic', xp: 100, top: '25%', icon: FaPython }); setIsBadgeModalOpen(true); }} className="cursor-pointer">
                             <BadgeCard type="bronze" icon={FaPython} title="Python Basic" tier="Bronze Tier" />
                         </div>
-                        <div onClick={() => { setSelectedBadge({ type: 'silver', title: 'JS Intermediate', xp: 300, top: '10%' }); setIsModalOpen(true); }} className="cursor-pointer">
+                        <div onClick={() => { setSelectedBadge({ type: 'silver', title: 'JS Intermediate', xp: 300, top: '10%', icon: FaJs }); setIsBadgeModalOpen(true); }} className="cursor-pointer">
                             <BadgeCard type="silver" icon={FaJs} title="JS Intermediate" tier="Silver Tier" />
                         </div>
-                        <div onClick={() => { setSelectedBadge({ type: 'gold', title: 'React Master', xp: 500, top: '5%' }); setIsModalOpen(true); }} className="cursor-pointer">
+                        <div onClick={() => { setSelectedBadge({ type: 'gold', title: 'React Master', xp: 500, top: '5%', icon: FaReact }); setIsBadgeModalOpen(true); }} className="cursor-pointer">
                             <BadgeCard type="gold" icon={FaReact} title="React Master" tier="Gold Tier" />
                         </div>
                     </div>
@@ -93,8 +95,9 @@ function App() {
 
             </main>
 
-            <CongratsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} badge={selectedBadge} />
-            <StreakModal isOpen={isStreakModalOpen} onClose={() => setIsStreakModalOpen(false)} streakCount={12} />
+            <CongratsModal isOpen={isCongratsOpen} onClose={() => setIsCongratsOpen(false)} badge={selectedBadge} />
+            <BadgeModal isOpen={isBadgeModalOpen} onClose={() => setIsBadgeModalOpen(false)} badge={selectedBadge} />
+            <StreakModal isOpen={isStreakModalOpen} onClose={() => setIsStreakModalOpen(false)} streakCount={100} />
         </div>
     );
 }
