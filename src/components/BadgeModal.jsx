@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaTimes, FaStar, FaDownload } from 'react-icons/fa';
+import { IoShieldSharp } from "react-icons/io5";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -125,15 +126,14 @@ const BadgeModal = ({ isOpen, onClose, badge }) => {
 
                 <div className="flex flex-col items-center mb-6">
                     <div className="relative mb-4">
-                        <div
-                            className="w-[80px] h-[90px] flex items-center justify-center text-4xl shadow-[0_10px_20px_rgba(0,0,0,0.3)] relative z-10"
-                            style={{
-                                background: getGradient(),
-                                clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
-                                color: shieldColor
-                            }}
-                        >
-                            {Icon && <Icon />}
+                        <div className="relative w-[80px] h-[90px] flex items-center justify-center z-10 mb-2 transition-transform duration-300 hover:scale-110">
+                            <IoShieldSharp className={`w-full h-full absolute inset-0 drop-shadow-md ${type === 'bronze' ? 'text-amber-700' :
+                                    type === 'silver' ? 'text-slate-300' :
+                                        'text-yellow-400'
+                                }`} />
+                            <div className="relative z-10 text-4xl" style={{ color: shieldColor }}>
+                                {Icon && <Icon />}
+                            </div>
                         </div>
                     </div>
 

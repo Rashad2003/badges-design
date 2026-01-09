@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaPython, FaJs, FaReact, FaStar } from 'react-icons/fa';
+import { IoShieldSharp } from "react-icons/io5";
 
 const BadgeCard = ({ type, icon: Icon, title, tier }) => {
     const getGradient = () => {
@@ -28,15 +29,14 @@ const BadgeCard = ({ type, icon: Icon, title, tier }) => {
                     <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_60%)] animate-spin-slow pointer-events-none" />
                 )}
 
-                <div
-                    className="w-[70px] h-[80px] flex items-center justify-center text-3xl shadow-[0_10px_20px_rgba(0,0,0,0.3)] mb-2 relative z-10"
-                    style={{
-                        background: getGradient(),
-                        clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)',
-                        color: shieldColor
-                    }}
-                >
-                    <Icon />
+                <div className="relative w-[70px] h-[80px] flex items-center justify-center z-10 mb-2 transition-transform duration-300 hover:scale-110">
+                    <IoShieldSharp className={`w-full h-full absolute inset-0 drop-shadow-md ${type === 'bronze' ? 'text-amber-700' :
+                            type === 'silver' ? 'text-slate-300' :
+                                'text-yellow-400'
+                        }`} />
+                    <div className="relative z-10 text-3xl" style={{ color: shieldColor }}>
+                        <Icon />
+                    </div>
                 </div>
 
                 <div className="flex gap-1 text-xs text-slate-400">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaCrown, FaTimes, FaFacebook, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { IoShieldSharp } from "react-icons/io5";
 import confetti from 'canvas-confetti';
 import html2canvas from 'html2canvas';
 
@@ -149,14 +150,18 @@ const CongratsModal = ({ isOpen, onClose, badge }) => {
                 {/* Badge Visual */}
                 <div className="relative w-[150px] h-[150px] mx-auto mb-8 flex items-center justify-center">
                     <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(251,191,36,0.4)_0%,transparent_70%)] animate-pulse-custom" />
-                    <div
-                        className="w-[100px] h-[115px] flex items-center justify-center text-5xl text-[#78350f] relative z-10"
-                        style={{
-                            background: getGradient(),
-                            clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)'
-                        }}
-                    >
-                        {Icon ? <Icon /> : <FaCrown />}
+                    <div className="relative w-[100px] h-[115px] flex items-center justify-center z-10 transition-transform duration-300 hover:scale-110">
+                        {/* Shield Background */}
+                        <IoShieldSharp
+                            className={`w-full h-full absolute inset-0 drop-shadow-lg ${type === 'bronze' ? 'text-amber-700' :
+                                type === 'silver' ? 'text-slate-300' :
+                                    'text-yellow-400'
+                                }`}
+                        />
+                        {/* Inner Icon */}
+                        <div className="relative z-10 text-4xl text-[#78350f]">
+                            {Icon ? <Icon /> : <FaCrown />}
+                        </div>
                     </div>
                 </div>
 
