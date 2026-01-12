@@ -17,7 +17,7 @@ const BadgeCard = ({ type, icon: Icon, title, tier }) => {
     return (
         <div className={`
       relative overflow-hidden rounded-[20px] p-8 text-center transition-all duration-300
-      bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)]
+      bg-[var(--color-bg-card)] border border-[rgba(255,255,255,0.1)]
       hover:-translate-y-1 hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.2)]
       ${type === 'bronze' ? 'group/bronze' : ''}
       ${type === 'silver' ? 'group/silver' : ''}
@@ -31,8 +31,8 @@ const BadgeCard = ({ type, icon: Icon, title, tier }) => {
 
                 <div className="relative w-[70px] h-[80px] flex items-center justify-center z-10 mb-2 transition-transform duration-300 hover:scale-110">
                     <IoShieldSharp className={`w-full h-full absolute inset-0 drop-shadow-md ${type === 'bronze' ? 'text-amber-700' :
-                            type === 'silver' ? 'text-slate-300' :
-                                'text-yellow-400'
+                        type === 'silver' ? 'text-slate-300' :
+                            'text-yellow-400'
                         }`} />
                     <div className="relative z-10 text-3xl" style={{ color: shieldColor }}>
                         <Icon />

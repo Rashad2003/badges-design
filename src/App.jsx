@@ -43,7 +43,7 @@ function App() {
                 {/* HERO */}
                 <section className="text-center mb-20">
                     <h1 className="text-6xl font-bold mb-4 leading-tight">
-                        Celebrate <span className="bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent">Achievement</span>
+                        Celebrate <span className="bg-gradient-to-r from-[var(--color-accent)] to-teal-200 bg-clip-text text-transparent">Achievement</span>
                     </h1>
                     <p className="text-slate-400 text-xl mb-8">Premium badge system designed for maximum student engagement.</p>
                     <button

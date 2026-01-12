@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaFire, FaCheck, FaFacebook, FaLinkedin } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
+import { FaFire, FaCheck, FaFacebook, FaLinkedin, FaDownload, FaTimes } from 'react-icons/fa';
+import { FaXTwitter, FaShareNodes } from 'react-icons/fa6';
 import confetti from 'canvas-confetti';
 import html2canvas from 'html2canvas';
 
 const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
     const [isVisible, setIsVisible] = useState(false);
+    const [showShareModal, setShowShareModal] = useState(false);
     const modalRef = useRef(null);
 
     useEffect(() => {
@@ -41,15 +42,15 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
             const canvas = await html2canvas(modalRef.current, {
                 useCORS: true,
                 scale: 2,
-                backgroundColor: '#0f172a', // Explicit HEX for background
+                backgroundColor: '#002147', // Explicit HEX for background
                 ignoreElements: (element) => element.classList.contains('data-[html2canvas-ignore]'),
                 onclone: (clonedDoc) => {
                     const clonedModal = clonedDoc.querySelector('[data-capture-target]');
                     if (clonedModal) {
                         // Force styles for the capture
-                        clonedModal.style.backgroundColor = '#0f172a';
+                        clonedModal.style.backgroundColor = '#002147';
                         clonedModal.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                        clonedModal.style.color = '#f8fafc';
+                        clonedModal.style.color = '#ffffff';
 
                         // Fix text colors
                         const titleEl = clonedModal.querySelector('h2');
@@ -58,6 +59,35 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
                         // Ensure streak count text is visible/colored correctly
                         const streakNum = clonedModal.querySelector('.streak-number');
                         if (streakNum) streakNum.style.color = '#ffffff';
+
+                        // Fix Fire Icon (orange-500)
+                        // SVG paths often inherit color, but we can try setting color on the wrapper or SVG itself
+                        const orangeIcons = clonedModal.querySelectorAll('.text-orange-500');
+                        orangeIcons.forEach(el => {
+                            el.style.color = '#f97316'; // HEX for orange-500
+                        });
+
+                        // Fix Progress Pills (bg-orange-500)
+                        const orangeBgs = clonedModal.querySelectorAll('.bg-orange-500');
+                        orangeBgs.forEach(el => {
+                            el.style.backgroundColor = '#f97316';
+                            el.style.borderColor = '#f97316';
+                        });
+
+                        // Fix Slate Text (text-slate-400 / text-slate-500)
+                        const slateText = clonedModal.querySelectorAll('.text-slate-400, .text-slate-500, .text-slate-700');
+                        slateText.forEach(el => {
+                            // Approximate slate colors in hex
+                            if (el.classList.contains('text-slate-400')) el.style.color = '#94a3b8';
+                            if (el.classList.contains('text-slate-500')) el.style.color = '#64748b';
+                            if (el.classList.contains('text-slate-700')) el.style.color = '#334155';
+                        });
+
+                        // Fix Border slate-700
+                        const slateBorders = clonedModal.querySelectorAll('.border-slate-700');
+                        slateBorders.forEach(el => {
+                            el.style.borderColor = '#334155';
+                        });
 
                     }
                 }
@@ -74,10 +104,7 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
     };
 
     const handleShare = async (platform) => {
-        // 1. Download the image first
-        await captureAndDownload();
-
-        // 2. Prepare share text
+        // Prepare share text
         const shareText = `I just hit a ${streakCount} day learning streak! 🔥 #KeepLearning`;
         const shareUrl = "https://lms-badges.demo";
         const encodedText = encodeURIComponent(shareText);
@@ -98,10 +125,11 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
                 return;
         }
 
-        // 3. Open share window with a small delay
-        setTimeout(() => {
-            window.open(url, '_blank', 'width=600,height=500,noopener,noreferrer');
-        }, 500);
+        window.open(url, '_blank', 'width=600,height=500,noopener,noreferrer');
+    };
+
+    const handleDownload = async () => {
+        await captureAndDownload();
     };
 
     if (!isVisible && !isOpen) return null;
@@ -121,20 +149,22 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
             <div
                 ref={modalRef}
                 data-capture-target
-                className={`relative w-[90%] max-w-[400px] bg-[#0f172a] border border-white/5 rounded-[30px] p-8 text-center shadow-2xl overflow-hidden transition-transform duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${isOpen ? 'scale-100' : 'scale-80'}`}
+                className={`relative w-[90%] max-w-[400px] bg-[#002147] border border-white/5 rounded-[30px] p-8 text-center shadow-2xl overflow-hidden transition-transform duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${isOpen ? 'scale-100' : 'scale-80'}`}
                 // Default styles for live view
+                style={{ backgroundColor: '#002147', borderColor: 'rgba(255,255,255,0.05)', color: '#ffffff' }}
                 onClick={e => e.stopPropagation()}
             >
 
                 {/* Background Glow */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-orange-500/20 blur-[80px] pointer-events-none" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] blur-[80px] pointer-events-none" style={{ backgroundColor: 'rgba(249, 115, 22, 0.2)' }} />
 
                 <div className="relative z-10">
 
                     {/* Fire Icon Main */}
                     <div className="mb-4 flex justify-center">
                         <div className="relative">
-                            <FaFire className="text-[120px] text-orange-500 drop-shadow-[0_0_25px_rgba(249,115,22,0.6)] animate-pulse-custom" />
+                            {/* Explicit inline color for icon */}
+                            <FaFire className="text-[120px] drop-shadow-[0_0_25px_rgba(249,115,22,0.6)] animate-pulse-custom" style={{ color: '#f97316' }} />
                             <div className="streak-number absolute bottom-2 left-1/2 -translate-x-1/2 text-white font-black text-4xl drop-shadow-lg">
                                 {streakCount}
                             </div>
@@ -142,14 +172,21 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
                     </div>
 
                     <h2 className="text-3xl font-bold mb-2 text-white">Day Streak</h2>
-                    <p className="text-slate-400 mb-8 text-sm">Congratulations on reaching a streak milestone!</p>
+                    <p className="mb-8 text-sm" style={{ color: '#94a3b8' }}>Congratulations on reaching a streak milestone!</p>
 
                     {/* Weekly Progress */}
                     <div className="flex justify-between mb-8 px-2">
                         {days.map((day, i) => (
                             <div key={i} className="flex flex-col items-center gap-2">
-                                <span className="text-xs font-bold text-slate-500">{day.name}</span>
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs border ${day.completed ? 'bg-orange-500 border-orange-500 text-white' : 'bg-transparent border-slate-700 text-slate-700'}`}>
+                                <span className="text-xs font-bold" style={{ color: '#64748b' }}>{day.name}</span>
+                                <div
+                                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs border`}
+                                    style={{
+                                        backgroundColor: day.completed ? '#f97316' : 'transparent',
+                                        borderColor: day.completed ? '#f97316' : '#334155',
+                                        color: day.completed ? '#ffffff' : '#334155'
+                                    }}
+                                >
                                     {day.completed && <FaCheck />}
                                 </div>
                             </div>
@@ -163,27 +200,66 @@ const StreakModal = ({ isOpen, onClose, streakCount = 100 }) => {
                             Continue
                         </button>
 
-                        <div className="border-t border-white/10 pt-6 w-full">
-                            <div className="flex justify-center gap-6 text-2xl text-slate-400">
-                                <FaFacebook
-                                    className="cursor-pointer hover:text-blue-500 transition-colors transform hover:scale-110"
-                                    onClick={() => handleShare('facebook')}
-                                    title="Share on Facebook"
-                                />
-                                <FaXTwitter
-                                    className="cursor-pointer hover:text-white transition-colors transform hover:scale-110"
-                                    onClick={() => handleShare('twitter')}
-                                    title="Share on X"
-                                />
-                                <FaLinkedin
-                                    className="cursor-pointer hover:text-blue-600 transition-colors transform hover:scale-110"
-                                    onClick={() => handleShare('linkedin')}
-                                    title="Share on LinkedIn"
-                                />
-                            </div>
+                        <div className="border-t border-white/10 pt-6 w-full flex justify-center">
+                            <button
+                                onClick={() => setShowShareModal(true)}
+                                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-lg font-medium"
+                            >
+                                <FaShareNodes />
+                                <span>Share Streak</span>
+                            </button>
                         </div>
-                    </div>
 
+                        {/* Share Modal Overlay */}
+                        {showShareModal && (
+                            <div className="absolute inset-0 z-50 flex items-center justify-center bg-slate-900/95 rounded-[30px] animate-in fade-in duration-200" onClick={(e) => e.stopPropagation()}>
+                                <div className="relative w-full max-w-[90%] p-6 flex flex-col items-center gap-6">
+                                    <button
+                                        onClick={() => setShowShareModal(false)}
+                                        className="absolute -top-2 -right-2 text-slate-400 hover:text-white p-2"
+                                    >
+                                        <FaTimes />
+                                    </button>
+
+                                    <h3 className="text-xl font-bold text-white mb-2">Share Streak</h3>
+
+                                    <div className="grid grid-cols-2 gap-4 w-full">
+                                        <button
+                                            onClick={() => handleShare('linkedin')}
+                                            className="flex flex-col items-center gap-2 p-4 bg-slate-800 hover:bg-slate-700 rounded-xl transition-colors border border-white/5"
+                                        >
+                                            <FaLinkedin className="text-2xl text-blue-500" />
+                                            <span className="text-sm font-medium text-slate-300">LinkedIn</span>
+                                        </button>
+
+                                        <button
+                                            onClick={() => handleShare('twitter')}
+                                            className="flex flex-col items-center gap-2 p-4 bg-slate-800 hover:bg-slate-700 rounded-xl transition-colors border border-white/5"
+                                        >
+                                            <FaXTwitter className="text-2xl text-white" />
+                                            <span className="text-sm font-medium text-slate-300">X (Twitter)</span>
+                                        </button>
+
+                                        <button
+                                            onClick={() => handleShare('facebook')}
+                                            className="flex flex-col items-center gap-2 p-4 bg-slate-800 hover:bg-slate-700 rounded-xl transition-colors border border-white/5"
+                                        >
+                                            <FaFacebook className="text-2xl text-blue-600" />
+                                            <span className="text-sm font-medium text-slate-300">Facebook</span>
+                                        </button>
+
+                                        <button
+                                            onClick={handleDownload}
+                                            className="flex flex-col items-center gap-2 p-4 bg-slate-800 hover:bg-slate-700 rounded-xl transition-colors border border-white/5"
+                                        >
+                                            <FaDownload className="text-2xl text-emerald-500" />
+                                            <span className="text-sm font-medium text-slate-300">Download</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
