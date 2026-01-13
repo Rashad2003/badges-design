@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { students } from '../data/students';
 import BadgeCard from './BadgeCard';
+import BadgeModal from './BadgeModal';
 import { QRCodeSVG } from 'qrcode.react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -12,6 +13,8 @@ const StudentProfile = () => {
     const [searchParams] = useSearchParams();
     const student = students.find(s => s.id === id);
     const [isGenerating, setIsGenerating] = React.useState(false);
+    const [isBadgeModalOpen, setIsBadgeModalOpen] = React.useState(false);
+    const [selectedBadge, setSelectedBadge] = React.useState(null);
 
     const handleDownloadPDF = async () => {
         const element = document.getElementById('profile-content');
@@ -120,17 +123,32 @@ const StudentProfile = () => {
 
                         <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,4fr))] gap-6">
                             {student.badges.map((badge, index) => (
-                                <BadgeCard
+                                <div
                                     key={index}
-                                    {...badge}
-                                    isProfile={true}
-                                />
+                                    onClick={() => {
+                                        setSelectedBadge(badge);
+                                        setIsBadgeModalOpen(true);
+                                    }}
+                                    className="cursor-pointer transition-transform hover:scale-105"
+                                >
+                                    <BadgeCard
+                                        {...badge}
+                                        isProfile={true}
+                                    />
+                                </div>
                             ))}
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            <BadgeModal
+                isOpen={isBadgeModalOpen}
+                onClose={() => setIsBadgeModalOpen(false)}
+                badge={selectedBadge}
+                studentId={student.id}
+            />
         </div>
     );
 };

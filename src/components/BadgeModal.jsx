@@ -3,8 +3,9 @@ import { FaTimes, FaStar, FaDownload, FaFacebook, FaLinkedin } from 'react-icons
 import { FaXTwitter, FaShareNodes } from 'react-icons/fa6';
 import { IoShieldSharp } from "react-icons/io5";
 import html2canvas from 'html2canvas';
+import { QRCodeSVG } from 'qrcode.react';
 
-const BadgeModal = ({ isOpen, onClose, badge }) => {
+const BadgeModal = ({ isOpen, onClose, badge, studentId }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
     const modalRef = useRef(null);
@@ -47,6 +48,16 @@ const BadgeModal = ({ isOpen, onClose, badge }) => {
                         clonedModal.style.backgroundColor = '#002147';
                         clonedModal.style.borderColor = 'rgba(255, 255, 255, 0.1)';
                         clonedModal.style.color = '#ffffff';
+
+                        // Certificate-like dimensions
+                        clonedModal.style.padding = '40px';
+                        clonedModal.style.boxSizing = 'border-box';
+                        clonedModal.style.width = '400px';
+                        clonedModal.style.maxWidth = 'none';
+                        clonedModal.style.height = 'auto';
+                        clonedModal.style.margin = '0';
+                        clonedModal.style.borderRadius = '24px'; // Slightly more rounded
+                        clonedModal.style.transform = 'none'; // Prevent scaling issues
                     }
                 }
             });
@@ -204,6 +215,14 @@ const BadgeModal = ({ isOpen, onClose, badge }) => {
                             </div>
                         </div>
                     )}
+                </div>
+
+                {/* Verification QR Code (Certificate Style) */}
+                <div className="absolute bottom-4 right-4 p-2 bg-white rounded-lg">
+                    <QRCodeSVG
+                        value={`${window.location.origin}/verify/${studentId || 'demo'}/${title.toLowerCase().replace(/\s+/g, '-')}`}
+                        size={48}
+                    />
                 </div>
             </div>
         </div>

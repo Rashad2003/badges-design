@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTrophy, FaCertificate, FaFire, FaQrcode } from 'react-icons/fa';
+import { FaTrophy, FaCertificate, FaFire } from 'react-icons/fa';
 import { FaPython, FaJs, FaReact } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import BadgeCard from './BadgeCard';
@@ -7,7 +7,6 @@ import BadgeCard from './BadgeCard';
 import BadgeModal from './BadgeModal';
 import CongratsModal from './CongratsModal';
 import StreakModal from './StreakModal';
-import { QRCodeSVG } from 'qrcode.react';
 
 function Home() {
     const [isCongratsOpen, setIsCongratsOpen] = useState(false);
@@ -33,12 +32,6 @@ function Home() {
                         <FaFire className="text-orange-500 text-lg animate-pulse" />
                         <span className="font-bold text-orange-100">100</span>
                     </div>
-
-                    <nav className="flex items-center gap-6">
-                        <Link to="/scan" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20">
-                            <FaQrcode /> Scan ID
-                        </Link>
-                    </nav>
                 </div>
             </header>
 
@@ -57,11 +50,6 @@ function Home() {
                         >
                             Test "Badge Earned" Animation
                         </button>
-
-                        <div className="bg-white p-4 rounded-xl shadow-lg text-center group transition-transform hover:scale-105 cursor-pointer">
-                            <QRCodeSVG value={`${window.location.origin}/student/alex-123?download=true`} />
-                            <p className="text-[10px] text-slate-500 mt-2 font-bold uppercase tracking-wider">Scan to Download</p>
-                        </div>
                     </div>
 
                     <div>
@@ -113,7 +101,7 @@ function Home() {
             </main>
 
             <CongratsModal isOpen={isCongratsOpen} onClose={() => setIsCongratsOpen(false)} badge={selectedBadge} />
-            <BadgeModal isOpen={isBadgeModalOpen} onClose={() => setIsBadgeModalOpen(false)} badge={selectedBadge} />
+            <BadgeModal isOpen={isBadgeModalOpen} onClose={() => setIsBadgeModalOpen(false)} badge={selectedBadge} studentId="alex-123" />
             <StreakModal isOpen={isStreakModalOpen} onClose={() => setIsStreakModalOpen(false)} streakCount={100} />
         </div>
     );
