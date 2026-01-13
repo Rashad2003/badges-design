@@ -58,18 +58,18 @@ const BadgeCard = ({ type, icon: Icon, title, tier, isProfile }) => {
                 )}
 
                 <div className="relative w-[70px] h-[80px] flex items-center justify-center z-10 mb-2 transition-transform duration-300 hover:scale-110">
-                    <IoShieldSharp className={`w-full h-full absolute inset-0 drop-shadow-md ${type === 'bronze' ? 'text-amber-700' :
-                        type === 'silver' ? 'text-slate-300' :
-                            'text-yellow-400'
+                    <IoShieldSharp className={`w-full h-full absolute inset-0 drop-shadow-md ${type === 'bronze' ? 'text-[#b45309]' :
+                        type === 'silver' ? 'text-[#cbd5e1]' :
+                            'text-[#facc15]'
                         }`} />
                     <div className="relative z-10 text-3xl" style={{ color: shieldColor }}>
                         <Icon />
                     </div>
                 </div>
 
-                <div className="flex gap-1 text-xs text-slate-400">
+                <div className="flex gap-1 text-xs text-[#94a3b8]">
                     {stars.map((_, i) => (
-                        <FaStar key={i} className={type !== 'bronze' ? 'text-amber-400' : ''} />
+                        <FaStar key={i} className={type !== 'bronze' ? 'text-[#fbbf24]' : ''} />
                     ))}
                 </div>
             </div>
@@ -77,9 +77,9 @@ const BadgeCard = ({ type, icon: Icon, title, tier, isProfile }) => {
             <div className="badge-info">
                 <h3 className="text-lg font-bold mb-1">{title}</h3>
                 <span className={`text-xs font-semibold uppercase tracking-widest opacity-70
-          ${type === 'bronze' ? 'text-orange-400' : ''}
-          ${type === 'silver' ? 'text-slate-300' : ''}
-          ${type === 'gold' ? 'text-amber-400' : ''}
+          ${type === 'bronze' ? 'text-[#fb923c]' : ''}
+          ${type === 'silver' ? 'text-[#cbd5e1]' : ''}
+          ${type === 'gold' ? 'text-[#fbbf24]' : ''}
         `}>
                     {tier}
                 </span>
