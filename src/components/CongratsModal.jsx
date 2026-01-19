@@ -4,8 +4,10 @@ import { FaXTwitter, FaShareNodes } from 'react-icons/fa6';
 import { IoShieldSharp } from "react-icons/io5";
 import confetti from 'canvas-confetti';
 import html2canvas from 'html2canvas';
+import { FaDiamond } from "react-icons/fa6";
 
 const CongratsModal = ({ isOpen, onClose, badge }) => {
+
     const [isVisible, setIsVisible] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
     const modalRef = useRef(null);
@@ -136,7 +138,7 @@ const CongratsModal = ({ isOpen, onClose, badge }) => {
                     <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(251,191,36,0.4)_0%,transparent_70%)] animate-pulse-custom" />
                     <div className="relative w-[100px] h-[115px] flex items-center justify-center z-10 transition-transform duration-300 hover:scale-110">
                         {/* Shield Background */}
-                        <IoShieldSharp
+                        <FaDiamond
                             className="w-full h-full absolute inset-0 drop-shadow-lg"
                             style={{
                                 color: type === 'bronze' ? '#b45309' :
