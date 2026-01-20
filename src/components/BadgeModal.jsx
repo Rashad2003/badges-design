@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaTimes, FaStar, FaDownload, FaFacebook, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter, FaShareNodes } from 'react-icons/fa6';
-import { IoShieldSharp } from "react-icons/io5";
+import BadgeIcon from './BadgeIcon';
 import html2canvas from 'html2canvas';
 import { QRCodeSVG } from 'qrcode.react';
 
@@ -119,19 +119,7 @@ const BadgeModal = ({ isOpen, onClose, badge, studentId }) => {
 
                 <div className="flex flex-col items-center mb-6">
                     <div className="relative mb-4">
-                        <div className="relative w-[80px] h-[90px] flex items-center justify-center z-10 mb-2 transition-transform duration-300 hover:scale-110">
-                            <IoShieldSharp
-                                className="w-full h-full absolute inset-0 drop-shadow-md"
-                                style={{
-                                    color: type === 'bronze' ? '#b45309' :
-                                        type === 'silver' ? '#cbd5e1' :
-                                            '#facc15'
-                                }}
-                            />
-                            <div className="relative z-10 text-4xl" style={{ color: shieldColor }}>
-                                {Icon && <Icon />}
-                            </div>
-                        </div>
+                        <BadgeIcon badge={badge} />
                     </div>
 
                     <h2 className="text-2xl font-bold mb-1" style={{ color: '#ffffff' }}>{title}</h2>

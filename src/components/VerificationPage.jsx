@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { students } from '../data/students';
 import { FaCheckCircle, FaTrophy, FaUserGraduate, FaArrowRight, FaLinkedin, FaFacebook, FaDownload, FaCertificate } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import BadgeCard from './BadgeCard';
+import BadgeIcon from './BadgeIcon';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -112,7 +112,7 @@ const VerificationPage = () => {
                                 <div className="relative group">
                                     <div className="absolute inset-0 bg-[rgba(48,145,157,0.2)] blur-3xl rounded-full group-hover:bg-[rgba(48,145,157,0.3)] transition-all duration-500"></div>
                                     <div className="relative transform group-hover:scale-105 transition-transform duration-500">
-                                        <BadgeCard {...badge} />
+                                        <BadgeIcon badge={badge} className="w-[200px] h-[200px]" />
                                     </div>
                                 </div>
                                 <div className="mt-8 flex gap-3" data-html2canvas-ignore>

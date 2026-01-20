@@ -19,7 +19,7 @@ export const Modal = () => {
             case 'bronze': return '#b45309';
             case 'silver': return '#cbd5e1';
             case 'gold':
-            default: return '#facc15';
+            default: return '#D4AF37';
         }
     };
 
@@ -70,7 +70,7 @@ export const Modal = () => {
                         style={{ color: getBadgeColor(badgeType) }}
                     />
                     {/* Inner Icon */}
-                    <div className="relative z-10 flex flex-col items-center justify-center pt-1" style={{ color: '#78350f' }}>
+                    <div className="relative z-10 flex flex-col items-center justify-center pt-1 text-[#000]">
                         <FaCrown className="text-2xl mb-1" />
                         <span className="text-xs font-bold uppercase tracking-wider mb-0.5">{badgeTitle}</span>
                         <div className="flex gap-0.5">
